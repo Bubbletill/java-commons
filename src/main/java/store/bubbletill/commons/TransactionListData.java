@@ -34,6 +34,10 @@ public class TransactionListData {
         return time;
     }
 
+    public String getDateTime() {
+        return date + " " + time;
+    }
+
     public int getTrans() {
         return trans;
     }
@@ -49,6 +53,7 @@ public class TransactionListData {
     public String getItems() {
         return items;
     }
+    public void setItems(String items) {this.items = items;}
 
     public double getTotal() {
         return total;

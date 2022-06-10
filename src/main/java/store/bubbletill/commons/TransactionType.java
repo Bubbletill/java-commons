@@ -2,6 +2,8 @@ package store.bubbletill.commons;
 
 public enum TransactionType {
 
+    VOID("Void"),
+
     SALE("Sale"),
     EXCHANGE("Exchange"),
     REFUND("Refund");

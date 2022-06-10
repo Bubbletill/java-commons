@@ -97,6 +97,9 @@ public class Transaction {
     public HashMap<String, String> getManagerActions() { return managerActions; }
 
     public TransactionType determineTransType() {
+        if (voided)
+            return TransactionType.VOID;
+
         boolean hasSale = false;
         boolean hasRefund = false;
         for (StockData item : basket) {
