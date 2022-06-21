@@ -16,6 +16,8 @@ public class XReadData {
     @Getter @Setter private int transactionCount;
     @Getter private double grandTotal;
     @Getter private int unitsSold;
+    @Getter private double cashInDraw;
+    @Getter @Setter private double systemCashInDraw;
 
     @Getter private HashMap<Integer, Double> totalPerCategory;
     @Getter private HashMap<PaymentType, Double> totalPerPaymentType;
@@ -39,6 +41,8 @@ public class XReadData {
 
         transVoidTotal = 0;
         itemVoidTotal = 0;
+        cashInDraw = 0;
+        systemCashInDraw = 0;
     }
 
     public void incrementGrandTotal(double amount) {
@@ -55,6 +59,14 @@ public class XReadData {
 
     public void incrementItemVoidTotal() {
         itemVoidTotal++;
+    }
+
+    public void incrementCashInDraw(double amount) {
+        cashInDraw += amount;
+    }
+
+    public void subtractCashInDraw(double amount) {
+        cashInDraw -= amount;
     }
 
 }

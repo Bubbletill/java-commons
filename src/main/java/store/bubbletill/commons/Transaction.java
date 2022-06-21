@@ -76,7 +76,7 @@ public class Transaction {
     }
     public double getRemainingTender() {return getBasketTotal() - getTenderTotal();}
 
-    public boolean isTenderComplete() { System.out.println("running"); return getTenderTotal() >= getBasketTotal(); }
+    public boolean isTenderComplete() { return getTenderTotal() >= getBasketTotal(); }
 
     public PaymentType getPrimaryTender() {
         PaymentType highest = PaymentType.VOID;

@@ -4,7 +4,7 @@ public class OperatorData {
 
     private String id;
     private String name;
-    //private String password;
+    private String password;
     private int manager;
     private String posperms;
     private String boperms;
@@ -17,5 +17,9 @@ public class OperatorData {
 
     public boolean isManager() {
         return manager == 1;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
