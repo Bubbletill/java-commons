@@ -1,5 +1,9 @@
 package store.bubbletill.commons;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class TransactionListData {
 
     private int utid;
@@ -10,9 +14,10 @@ public class TransactionListData {
     private int trans;
     private TransactionType type;
     private String oper;
-    private String items;
+    private List<StockData> basket;
+    private List<String> data;
     private double total;
-    private PaymentType primary_method;
+    private HashMap<PaymentType, Double> methods;
 
     public int getUtid() {
         return utid;
@@ -50,16 +55,13 @@ public class TransactionListData {
         return oper;
     }
 
-    public String getItems() {
-        return items;
-    }
-    public void setItems(String items) {this.items = items;}
+    public List<StockData> getBasket() { return basket; }
+
+    public List<String> getData() { return data; }
 
     public double getTotal() {
         return total;
     }
 
-    public PaymentType getPrimary_method() {
-        return primary_method;
-    }
+    public HashMap<PaymentType, Double> getMethods() { return methods; }
 }

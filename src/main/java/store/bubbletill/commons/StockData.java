@@ -7,7 +7,7 @@ public class StockData {
     private String description;
     private double price;
     private double priceReduction;
-    private boolean refunded;
+    private boolean refund;
 
     public StockData(int category, int code, String description, double price) {
         this.category = category;
@@ -15,7 +15,7 @@ public class StockData {
         this.description = description;
         this.price = price;
         this.priceReduction = 0;
-        this.refunded = false;
+        this.refund = false;
     }
 
     public int getCategory() { return category; }
@@ -30,6 +30,6 @@ public class StockData {
 
     public void setPriceReduction(double priceReduction) { this.priceReduction = priceReduction; }
 
-    public boolean isRefunded() { return refunded; }
-    public void setRefunded(boolean refunded) {this.refunded = refunded;}
+    public boolean isRefund() { return refund; }
+    public void setRefund(boolean refund) {this.refund = refund;}
 }

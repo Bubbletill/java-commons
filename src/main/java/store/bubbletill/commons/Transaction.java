@@ -18,12 +18,15 @@ public class Transaction {
     private List<StockData> basket;
     private HashMap<PaymentType, Double> tender;
 
+    private List<String> dataLogs;
+
     public Transaction(int id) {
         this.id = id;
         time = System.currentTimeMillis() / 1000L;
         basket = new ArrayList<>();
         tender = new HashMap<>();
         managerActions = new HashMap<>();
+        dataLogs = new ArrayList<>();
         voided = false;
     }
 
@@ -41,7 +44,18 @@ public class Transaction {
     }
     public void addToBasket(StockData stockData) {
         basket.add(stockData);
+        log("" + stockData.getCategory() + " " + stockData.getItemCode() + " - £" + Formatters.decimalFormatter.format(stockData.getPriceWithReduction()));
     }
+
+    public double getBasketSubTotal() {
+        double total = 0.0;
+        for (StockData sd : basket) {
+            total += sd.getPrice();
+        }
+
+        return total;
+    }
+
     public double getBasketTotal() {
         double total = 0.0;
         for (StockData sd : basket) {
@@ -51,19 +65,35 @@ public class Transaction {
         return total;
     }
 
+    public void log(String string) {
+        dataLogs.add(string);
+    }
+
+    public List<String> getLogs() { return dataLogs; }
+    public void setLogs(List<String> dataLogs) {
+        this.dataLogs = dataLogs;
+        if (this.dataLogs == null)
+            this.dataLogs = new ArrayList<>();
+    }
+
     public void addTender(PaymentType paymentType, double amount) {
         if (!tender.containsKey(paymentType)) {
             tender.put(paymentType, amount);
+            log("TOTAL £" + Formatters.decimalFormatter.format(getBasketTotal()));
+            log("TENDER " + paymentType + " of £" + Formatters.decimalFormatter.format(amount));
             return;
         }
 
         double current = tender.get(paymentType);
         tender.put(paymentType, current + amount);
+
+        log("TENDER " + paymentType + " of £" + Formatters.decimalFormatter.format(amount));
     }
 
     public HashMap<PaymentType, Double> getTender() {return tender;}
     public void voidTender() {
         tender.clear();
+        log("TENDER VOIDED");
     }
 
     public double getTenderTotal() {
@@ -93,7 +123,11 @@ public class Transaction {
 
     public boolean isVoided() { return voided; }
     public void setVoided(boolean voided) { this.voided = voided; }
-    public void addManagerAction(String actionId, String operId) { managerActions.put(actionId, operId); }
+
+    public void addManagerAction(String actionId, String operId) {
+        managerActions.put(actionId, operId);
+        log(operId + " authorised " + actionId);
+    }
     public HashMap<String, String> getManagerActions() { return managerActions; }
 
     public TransactionType determineTransType() {
@@ -103,7 +137,7 @@ public class Transaction {
         boolean hasSale = false;
         boolean hasRefund = false;
         for (StockData item : basket) {
-            if (item.isRefunded())
+            if (item.isRefund())
                 hasRefund = true;
             else
                 hasSale = true;
