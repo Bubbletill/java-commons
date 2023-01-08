@@ -11,6 +11,7 @@ public class Transaction {
     private int id;
     private long time;
     private boolean voided;
+    private TransactionType overrideTransType;
 
     private HashMap<String, String> managerActions;
 
@@ -130,7 +131,14 @@ public class Transaction {
     }
     public HashMap<String, String> getManagerActions() { return managerActions; }
 
+    public void overrideTransType(TransactionType type) {
+        overrideTransType = type;
+    }
+
     public TransactionType determineTransType() {
+        if (overrideTransType != null)
+            return overrideTransType;
+
         if (voided)
             return TransactionType.VOID;
 
