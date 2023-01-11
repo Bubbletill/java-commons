@@ -1,12 +1,14 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+
 public enum PaymentType {
 
     CASH("Cash", true),
     CARD("Debit/Credit", false),
     VOID("Void", false);
 
-    private String localName;
+    @Getter private String localName;
     private boolean requiresCashDraw;
 
     private PaymentType(String localName, boolean requiresCashDraw) {
@@ -14,6 +16,5 @@ public enum PaymentType {
         this.requiresCashDraw = requiresCashDraw;
     }
 
-    public String getLocalName() {return localName;}
     public boolean requiresCashDraw() { return requiresCashDraw; }
 }

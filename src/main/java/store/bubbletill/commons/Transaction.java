@@ -1,5 +1,8 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,16 +11,16 @@ import java.util.Map;
 public class Transaction {
 
     // Details
-    private int id;
-    private long time;
-    private boolean voided;
+    @Getter private int id;
+    @Getter private long time;
+    @Getter @Setter private boolean voided;
     private TransactionType overrideTransType;
 
     private HashMap<String, String> managerActions;
 
     // Basket
-    private List<StockData> basket;
-    private HashMap<PaymentType, Double> tender;
+    @Getter @Setter private List<StockData> basket;
+    @Getter private HashMap<PaymentType, Double> tender;
 
     private List<String> dataLogs;
 
@@ -31,18 +34,7 @@ public class Transaction {
         voided = false;
     }
 
-    public int getId() {
-        return id;
-    }
-    public long getTime() {return time;}
 
-    public List<StockData> getBasket() {
-        return basket;
-    }
-
-    public void setBasket(List<StockData> basket) {
-        this.basket = basket;
-    }
     public void addToBasket(StockData stockData) {
         basket.add(stockData);
         log("" + stockData.getCategory() + " " + stockData.getItemCode() + " - £" + Formatters.decimalFormatter.format(stockData.getPriceWithReduction()));
@@ -91,7 +83,6 @@ public class Transaction {
         log("TENDER " + paymentType + " of £" + Formatters.decimalFormatter.format(amount));
     }
 
-    public HashMap<PaymentType, Double> getTender() {return tender;}
     public void voidTender() {
         tender.clear();
         log("TENDER VOIDED");
@@ -121,9 +112,6 @@ public class Transaction {
 
         return highest;
     }
-
-    public boolean isVoided() { return voided; }
-    public void setVoided(boolean voided) { this.voided = voided; }
 
     public void addManagerAction(String actionId, String operId) {
         managerActions.put(actionId, operId);

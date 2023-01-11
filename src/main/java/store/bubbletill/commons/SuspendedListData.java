@@ -1,33 +1,16 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+
 public class SuspendedListData {
-    private String date;
-    private String oper;
-    private Integer reg;
-    private Integer usid;
-    private double total;
+
+    @Getter private String date;
+    @Getter private String oper;
+    @Getter private Integer reg;
+    @Getter private Integer usid;
+    @Getter private double total;
 
     public SuspendedListData() { }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getOper() {
-        return oper;
-    }
-
-    public Integer getReg() {
-        return reg;
-    }
-
-    public Integer getUsid() {
-        return usid;
-    }
-
-    public double getTotal() {
-        return total;
-    }
 
     public String getStringTotal() {
         return "£" + Formatters.decimalFormatter.format(getTotal());

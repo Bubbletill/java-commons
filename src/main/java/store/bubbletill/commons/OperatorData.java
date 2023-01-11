@@ -1,25 +1,25 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+
 public class OperatorData {
 
-    private String id;
-    private String name;
-    private String password;
+    @Getter private String id;
+    @Getter private String name;
+    @Getter private String password;
     private int manager;
     private String posperms;
     private String boperms;
 
-    public String getOperatorId() {
-        return id;
+    public OperatorData(String id, String name, String password, int manager) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.manager = manager;
     }
-
-    public String getName() { return name; }
 
     public boolean isManager() {
         return manager == 1;
     }
 
-    public String getPassword() {
-        return password;
-    }
 }

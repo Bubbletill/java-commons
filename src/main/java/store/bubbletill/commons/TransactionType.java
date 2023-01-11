@@ -1,5 +1,7 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+
 public enum TransactionType {
 
     VOID("Void", false),
@@ -9,16 +11,12 @@ public enum TransactionType {
     EXCHANGE("Exchange", true),
     REFUND("Refund", true);
 
-    private String localName;
+    @Getter private String localName;
     private boolean promptReceipt;
 
     private TransactionType(String localName, boolean promptReceipt) {
         this.localName = localName;
         this.promptReceipt = promptReceipt;
-    }
-
-    public String getLocalName() {
-        return localName;
     }
 
     public boolean promptReceipt() {

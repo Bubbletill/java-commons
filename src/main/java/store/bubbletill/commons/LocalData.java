@@ -1,17 +1,15 @@
 package store.bubbletill.commons;
 
+import lombok.Getter;
+
 public class LocalData {
 
-    private int storeno;
-    private int regno;
-    private String token;
-    private String backend;
+    @Getter private int store;
+    @Getter private int reg;
+    @Getter private String token;
+    @Getter private String backend;
 
-    public int getStore() { return storeno; }
+    @Getter private String dbUsername;
+    @Getter private String dbPassword;
 
-    public int getReg() { return regno; }
-
-    public String getToken() { return token; }
-
-    public String getBackend() { return backend; }
 }
